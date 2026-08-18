@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Space+Grotesk:wght@400;500;600&display=swap');
+
+:root{
+  --paper:   #efe6d3;
+  --card:    #fbf6ec;
+  --ink:     #1f2e3d;
+  --azulejo: #3b6e8f;
+  --stamp:   #b5502f;
+  --shadow:  rgba(31,46,61,0.16);
+}
+
+*{ box-sizing:border-box; }
+
+html,body{
+  margin:0;
+  padding:0;
+  min-height:100vh;
+  background-color:var(--paper);
+  background-image:radial-gradient(var(--stamp) 1.4px, transparent 1.4px);
+  background-size:16px 16px;
+  color:var(--ink);
+  font-family:'Space Grotesk', sans-serif;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:clamp(1.25rem, 6vw, 3rem) clamp(1rem, 5vw, 2rem);
+}
+
+@media (prefers-reduced-motion: no-preference){
+  .card{ animation: settle .5s cubic-bezier(.2,.7,.3,1) both; }
+  @keyframes settle{
+    from{ opacity:0; transform:translateY(8px); }
+    to{ opacity:1; transform:translateY(0); }
+  }
+}
+
+.card{
+  width:100%;
+  max-width:440px;
+  background:var(--card);
+  border-radius:14px;
+  overflow:hidden;
+  box-shadow:0 16px 30px var(--shadow);
+}
+
+.azulejo-band{
+  height:14px;
+  background-image:
+    linear-gradient(45deg, var(--azulejo) 25%, transparent 25%),
+    linear-gradient(-45deg, var(--azulejo) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, var(--azulejo) 75%),
+    linear-gradient(-45deg, transparent 75%, var(--azulejo) 75%);
+  background-size:14px 14px;
+  background-position:0 0, 0 7px, 7px -7px, -7px 0;
+}
+
+.content{
+  padding:clamp(1.1rem, 5vw, 1.75rem);
+}
+
+h1{
+  font-family:'Fraunces', serif;
+  font-weight:600;
+  font-size:clamp(1.5rem, 7vw, 2rem);
+  line-height:1.15;
+  margin:0 0 1.1rem;
+  text-align:center;
+}
+
+.media-wrap{
+  margin:0 0 1.1rem;
+}
+#media{
+  border:5px solid #fff;
+  border-radius:6px;
+  box-shadow:0 6px 16px var(--shadow);
+  min-height:200px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#e4dbc6;
+  overflow:hidden;
+}
+#media img, #media video{
+  display:block;
+  width:100%;
+  height:auto;
+  max-height:70vh;
+  object-fit:cover;
+}
+.placeholder{
+  font-size:0.9rem;
+  color:var(--ink);
+  opacity:0.55;
+  padding:2.5rem 1rem;
+  text-align:center;
+}
+
+#caption{
+  font-family:'Fraunces', serif;
+  font-style:italic;
+  font-size:clamp(1rem, 4vw, 1.1rem);
+  line-height:1.5;
+  color:var(--ink);
+  margin:0;
+  text-align:center;
+}
+#caption.is-placeholder{ opacity:0.45; }

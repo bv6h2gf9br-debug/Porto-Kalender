@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Noch 7 Tage · Porto</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <div class="card">
+    <div class="azulejo-band"></div>
+    <div class="content">
+      <h1>Noch 7 Tage</h1>
+
+      <div class="media-wrap">
+        <div id="media"><div class="placeholder">Lädt …</div></div>
+      </div>
+
+      <p id="caption" class="is-placeholder">Text folgt bald.</p>
+    </div>
+  </div>
+
+<script>
+(async function(){
+  const mediaEl = document.getElementById('media');
+  const captionEl = document.getElementById('caption');
+
+  async function exists(url){
+    try{ const r = await fetch(url, {method:'HEAD', cache:'no-store'}); return r.ok; }
+    catch(e){ return false; }
+  }
+
+  if (await exists('video.mp4')) {
+    mediaEl.innerHTML = '<video controls playsinline preload="metadata" src="video.mp4"></video>';
+  } else if (await exists('photo.jpg')) {
+    mediaEl.innerHTML = '<img src="photo.jpg" alt="Foto">';
+  } else {
+    mediaEl.innerHTML = '<div class="placeholder">📷 Foto folgt bald</div>';
+  }
+
+  try{
+    const r = await fetch('caption.txt', {cache:'no-store'});
+    if (r.ok) {
+      const t = (await r.text()).trim();
+      if (t) { captionEl.textContent = t; captionEl.classList.remove('is-placeholder'); }
+    }
+  } catch(e){}
+})();
+</script>
+</body>
+</html>
